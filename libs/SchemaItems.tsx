@@ -1,45 +1,49 @@
-import { defineComponent, PropType} from "vue";
+import { computed, defineComponent, inject } from 'vue'
 
-import { Schema, SchemaTypes } from './types'
+import { SchemaTypes, FilePropsDefine } from './types'
+
+import { retrieveSchema } from './utils'
 
 import NumberField from './fields/NumberField'
 import StringField from './fields/StringField'
-// import StringField from './fields/StringField.vue'
+import ObjectField from './fields/ObjectField'
 
 export default defineComponent({
- name: "SchemaItems",
- props: {
-    schema: {
-      type: Object as PropType<Schema>,
-      required: true,
-    },
-    value: {
-      required: true,
-    },
-    onChange: {
-      type: Function as PropType<(v: any) => void>,
-      required: true,
-    },
- },
- setup(props) {
-   return() => {
-    const {schema} = props
-    const type = schema.type
-    let Component : any
-    switch(type) {
-     case SchemaTypes.NUMBER : { 
-       Component = NumberField
-       break
-     }
-     case SchemaTypes.STRING : {
-       Component = StringField
-       break
-     }
-     default: {
-       console.warn(`${type} is not supported`)
-     }
+  name: 'SchemaItems',
+  props: FilePropsDefine,
+  setup(props) {
+    const retrievedSchemaRef = computed(() => {
+      const { schema, rootSchema, value } = props
+      return retrieveSchema(schema, rootSchema, value)
+    })
+
+    return () => {
+      const { schema, rootSchema, value } = props
+      const retrievedSchema = retrievedSchemaRef.value
+
+      // TODO: 如果type没有指定，我们要猜测这个type
+      const type = schema.type
+      let Component: any
+
+      switch (type) {
+        case SchemaTypes.NUMBER: {
+          Component = NumberField
+          break
+        }
+        case SchemaTypes.STRING: {
+          Component = StringField
+          break
+        }
+        case SchemaTypes.OBJECT: {
+          Component = ObjectField
+          break
+        }
+        default: {
+          console.warn(`${type} is not supported`)
+        }
+      }
+
+      return <Component {...props} schema={retrievedSchema} /> // ? 这里的schema重复传了
     }
-    return (<Component {...props} />)
- } 
-}
+  },
 })

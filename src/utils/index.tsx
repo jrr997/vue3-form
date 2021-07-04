@@ -1,5 +1,5 @@
 function toJson(data: any) {
-  return JSON.stringify(data, null ,2)
+  return JSON.stringify(data, null, 2)
 }
 
-export {toJson}
+export { toJson }

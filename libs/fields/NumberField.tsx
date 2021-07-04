@@ -1,13 +1,10 @@
-import { defineComponent } from "vue"
+import { defineComponent } from 'vue'
 
 import { FilePropsDefine } from '../types'
 
-
 export default defineComponent({
   name: 'NumberFeild',
-  props: {
-    ...FilePropsDefine
-  },
+  props: FilePropsDefine,
   setup(props) {
     const handleChange = (e: any) => {
       const value = e.target.value
@@ -20,8 +17,10 @@ export default defineComponent({
         props.onChange && props.onChange(e.target.value)
       }
     }
-    return () => (
-      <input type="text" onInput={handleChange} />
-    )
-  }
+    return () => {
+      const { value }: any = props
+
+      return <input type="text" onInput={handleChange} value={value} />
+    }
+  },
 })

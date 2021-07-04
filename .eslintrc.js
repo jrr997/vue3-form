@@ -16,8 +16,13 @@ module.exports = {
   rules: {
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
-    '@typescript-eslint/no-explicit-any': ['off'],
+
+    '@typescript-eslint/no-explicit-any': ['off'], // 允许typescript使用any
+    '@typescript-eslint/no-use-before-define': 'off', // 允许在声明函数前使用函数
+    'no-prototype-builtins': 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
+    '@typescript-eslint/camelcase': 'off', // 允许非驼峰命名
+    '@typescript-eslint/no-unused-vars': 'off', // 允许声明却不使用变量
   },
   overrides: [
     {

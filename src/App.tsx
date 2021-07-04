@@ -89,7 +89,8 @@ export default defineComponent({
       demo.data = d.default
       demo.uiSchema = d.uiSchema
       demo.schemaCode = toJson(d.schema)
-      demo.dataCode
+      demo.dataCode = toJson(d.default)
+      demo.uiSchemaCode = toJson(d.uiSchema)
     })
 
     const methodRef: Ref<any> = ref()
@@ -104,12 +105,11 @@ export default defineComponent({
     // 编辑器代码变化时触发
     function handleCodeChange(
       filed: 'schema' | 'data' | 'uiSchema',
-      value: string,
+      value: string
     ) {
       try {
         const json = JSON.parse(value)
-        demo[filed] = json
-        (demo as any)[`${filed}Code`] = value
+        demo[filed] = json(demo as any)[`${filed}Code`] = value
       } catch (err) {
         // some thing
       }
@@ -125,7 +125,8 @@ export default defineComponent({
 
       console.log(methodRef)
 
-      return ( // <StyleThemeProvider>
+      return (
+        // <StyleThemeProvider>
         // <VJSFThemeProvider theme={theme as any}>
         <div class={classes.container}>
           <div class={classes.menu}>
@@ -169,9 +170,10 @@ export default defineComponent({
             </div>
             <div class={classes.form}>
               <SchemaForm
-              schema={demo.schema}
-              onChange={handleChange}
-              value={demo.data}
+                schema={demo.schema}
+                onChange={handleChange}
+                value={demo.data}
+                rootSchema={{ type: '' }}
               />
 
               {/* <SchemaForm
@@ -186,7 +188,7 @@ export default defineComponent({
         </div>
         // </VJSFThemeProvider>
         // </StyleThemeProvider>)
-      )  
+      )
     }
-  }
+  },
 })
