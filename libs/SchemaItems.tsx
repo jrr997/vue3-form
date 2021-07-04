@@ -7,6 +7,7 @@ import { retrieveSchema } from './utils'
 import NumberField from './fields/NumberField'
 import StringField from './fields/StringField'
 import ObjectField from './fields/ObjectField'
+import ArrayField from './fields/ArrayField'
 
 export default defineComponent({
   name: 'SchemaItems',
@@ -36,6 +37,10 @@ export default defineComponent({
         }
         case SchemaTypes.OBJECT: {
           Component = ObjectField
+          break
+        }
+        case SchemaTypes.ARRAY: {
+          Component = ArrayField
           break
         }
         default: {

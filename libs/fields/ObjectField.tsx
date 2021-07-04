@@ -1,8 +1,8 @@
 import { defineComponent, inject } from 'vue'
 
-import { SchemaFormContextKey } from '../context'
+import { SchemaFormContextKey, useVJSFContext } from '../context'
 
-import { FilePropsDefine } from '../types'
+import { FilePropsDefine, CommonFileType } from '../types'
 
 import { isObject } from '../utils'
 
@@ -18,23 +18,11 @@ const schema = {
   },
 }
 
-const TypeHelperComponent = defineComponent({
-  props: FilePropsDefine,
-})
-
-type SchemaItemDefined = typeof TypeHelperComponent
-
 export default defineComponent({
   name: '',
   props: FilePropsDefine,
   setup(props) {
-    const context: { SchemaItem: SchemaItemDefined } | undefined = inject(
-      SchemaFormContextKey
-    )
-
-    if (!context) {
-      throw Error('SchemaForm should be used')
-    }
+    const context = useVJSFContext()
 
     const handleObjectFieldChange = (key: string, v: any) => {
       const value: any = isObject(props.value) ? props.value : {}

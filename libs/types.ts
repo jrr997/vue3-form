@@ -1,4 +1,4 @@
-import { PropType } from '@vue/runtime-core'
+import { PropType, defineComponent } from '@vue/runtime-core'
 
 export enum SchemaTypes {
   'NUMBER' = 'number',
@@ -67,3 +67,9 @@ export const FilePropsDefine = {
     required: true,
   },
 } as const
+
+const TypeHelperComponent = defineComponent({
+  props: FilePropsDefine,
+})
+
+export type CommonFileType = typeof TypeHelperComponent
