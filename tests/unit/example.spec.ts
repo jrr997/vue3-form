@@ -13,7 +13,6 @@ describe('SchemaForm', () => {
         onChange: (v: any) => {
           value = v
         },
-        rootSchema: {},
       },
     })
 

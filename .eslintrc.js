@@ -23,6 +23,7 @@ module.exports = {
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     '@typescript-eslint/camelcase': 'off', // 允许非驼峰命名
     '@typescript-eslint/no-unused-vars': 'off', // 允许声明却不使用变量
+    '@typescript-eslint/no-empty-function': 'off', // 允许声明空的箭头函数
   },
   overrides: [
     {

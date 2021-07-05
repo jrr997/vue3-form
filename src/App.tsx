@@ -173,7 +173,7 @@ export default defineComponent({
                 schema={demo.schema}
                 onChange={handleChange}
                 value={demo.data}
-                rootSchema={{ type: '' }}
+                // rootSchema={{ type: '' }}
               />
 
               {/* <SchemaForm
