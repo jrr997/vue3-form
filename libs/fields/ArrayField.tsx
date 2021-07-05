@@ -6,6 +6,8 @@ import { FilePropsDefine, Schema } from '../types'
 
 import { useVJSFContext } from '../context'
 
+import SelectionWidget from '../widgets/Selection'
+
 const useStyles = createUseStyles({
   container: {
     border: '1px solid #eee',
@@ -202,9 +204,21 @@ export default defineComponent({
             </ArrayItemWrapper>
           )
         })
-      }
+      } else {
+        const enumOptions = (schema as any).items.enum
+        const options = enumOptions.map((e: any) => ({
+          key: e,
+          value: e,
+        }))
 
-      return <div>hehe</div>
+        return (
+          <SelectionWidget
+            onChange={props.onChange}
+            value={props.value}
+            options={options}
+          />
+        )
+      }
     }
   },
 })
