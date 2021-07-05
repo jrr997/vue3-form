@@ -1,5 +1,5 @@
 import { shallowMount, mount } from '@vue/test-utils'
-import SchemaForm, { NumberField } from '../../libs'
+import SchemaForm, { NumberField } from '../../lib'
 
 describe('SchemaForm', () => {
   it('should render correct number field', async () => {

@@ -3,7 +3,7 @@ import MonacoEditor from './components/MonacoEditor'
 import { toJson } from './utils'
 import demos from './demos'
 import { createUseStyles } from 'vue-jss'
-import SchemaForm from '../libs'
+import SchemaForm from '../lib'
 
 type Schema = any
 type UISchema = any
