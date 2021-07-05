@@ -14,7 +14,7 @@ export default defineComponent({
       if (Number.isNaN(num)) {
         props.onChange && props.onChange(undefined)
       } else {
-        props.onChange && props.onChange(e.target.value)
+        props.onChange && props.onChange(num)
       }
     }
     return () => {
