@@ -6,7 +6,10 @@ const TextWidget: CommonWidgetDefine = defineComponent({
   setup(props) {
     const handleChange = (e: any) => {
       console.log(e)
-      props.onChange(e.target.value)
+      // controlled-input
+      const inputValue: any = e.target.value
+      e.target.value = props.value
+      props.onChange(inputValue)
     }
     return () => {
       return (

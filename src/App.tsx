@@ -99,6 +99,8 @@ export default defineComponent({
     const classesRef = useStyles()
 
     const handleChange = (v: any) => {
+      console.log('App.tsx -> handleChange', v)
+
       demo.data = v
       demo.dataCode = toJson(v)
     }
