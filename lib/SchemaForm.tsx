@@ -1,6 +1,6 @@
 import { defineComponent, provide, PropType } from 'vue'
 
-import { Schema, SchemaTypes, FilePropsDefine } from './types'
+import { Schema, SchemaTypes, FieldPropsDefine, Theme } from './types'
 import SchemaItem from './SchemaItems'
 import { SchemaFormContextKey } from './context'
 
@@ -22,6 +22,7 @@ export default defineComponent({
   setup(props, { slots, emit, attrs }) {
     const context: any = {
       SchemaItem,
+      // theme: props.theme
     }
 
     provide(SchemaFormContextKey, context)

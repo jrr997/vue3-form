@@ -1,4 +1,4 @@
-import { PropType, defineComponent } from '@vue/runtime-core'
+import { PropType, defineComponent, DefineComponent } from 'vue'
 
 export enum SchemaTypes {
   'NUMBER' = 'number',
@@ -50,7 +50,7 @@ export interface Schema {
   exclusiveMinimum?: number
 }
 
-export const FilePropsDefine = {
+export const FieldPropsDefine = {
   schema: {
     type: Object as PropType<Schema>,
     required: true,
@@ -69,7 +69,60 @@ export const FilePropsDefine = {
 } as const
 
 const TypeHelperComponent = defineComponent({
-  props: FilePropsDefine,
+  props: FieldPropsDefine,
 })
 
-export type CommonFileType = typeof TypeHelperComponent
+export type CommonFieldType = typeof TypeHelperComponent
+
+// 控件公共的props
+export const CommonWidgetPropsDefine = {
+  value: {},
+  onChange: {
+    type: Function as PropType<(v: any) => void>,
+    required: true,
+  },
+} as const
+
+// 控件的type
+export type CommonWidgetDefine = DefineComponent<
+  typeof CommonWidgetPropsDefine,
+  {},
+  {}
+>
+
+// Selection控件的Props
+export const SelectionWidgetPropsDefine = {
+  ...CommonWidgetPropsDefine,
+  options: {
+    type: Array as PropType<
+      {
+        key: string
+        value: any
+      }[]
+    >,
+    required: true,
+  },
+} as const
+
+export type SelectionWidgetDefine = DefineComponent<
+  typeof SelectionWidgetPropsDefine,
+  {},
+  {}
+>
+
+export enum SelectionWidgetNames {
+  SelectionWidget = 'SelectionWidget',
+}
+
+export enum CommonWidgetNames {
+  TextWidget = 'TextWidget',
+  NumberWidget = 'NumberWidget',
+}
+
+export interface Theme {
+  widgets: {
+    [SelectionWidgetNames.SelectionWidget]: SelectionWidgetDefine
+    [CommonWidgetNames.TextWidget]: CommonWidgetDefine
+    [CommonWidgetNames.NumberWidget]: CommonWidgetDefine
+  }
+}

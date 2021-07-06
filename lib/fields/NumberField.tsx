@@ -1,10 +1,10 @@
 import { defineComponent } from 'vue'
 
-import { FilePropsDefine } from '../types'
+import { FieldPropsDefine } from '../types'
 
 export default defineComponent({
   name: 'NumberFeild',
-  props: FilePropsDefine,
+  props: FieldPropsDefine,
   setup(props) {
     const handleChange = (e: any) => {
       const value = e.target.value

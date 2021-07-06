@@ -4,7 +4,17 @@ import StringField from './fields/StringField'
 import ArrayField from './fields/ArrayField'
 import ObjectField from './fields/ObjectField'
 import SelectionWidget from './widgets/Selection'
+import ThemeProvider from './theme'
 
 export default SchemaFrom
 
-export { NumberField, StringField, SelectionWidget, ArrayField, ObjectField }
+export * from './types'
+
+export {
+  NumberField,
+  StringField,
+  SelectionWidget,
+  ArrayField,
+  ObjectField,
+  ThemeProvider,
+}

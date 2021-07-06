@@ -2,7 +2,7 @@ import { defineComponent, inject } from 'vue'
 
 import { SchemaFormContextKey, useVJSFContext } from '../context'
 
-import { FilePropsDefine, CommonFileType } from '../types'
+import { FieldPropsDefine, CommonFieldType } from '../types'
 
 import { isObject } from '../utils'
 
@@ -20,7 +20,7 @@ const schema = {
 
 export default defineComponent({
   name: '',
-  props: FilePropsDefine,
+  props: FieldPropsDefine,
   setup(props) {
     const context = useVJSFContext()
 

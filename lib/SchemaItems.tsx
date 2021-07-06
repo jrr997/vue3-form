@@ -1,6 +1,6 @@
 import { computed, defineComponent, inject } from 'vue'
 
-import { SchemaTypes, FilePropsDefine } from './types'
+import { SchemaTypes, FieldPropsDefine } from './types'
 
 import { retrieveSchema } from './utils'
 
@@ -11,7 +11,7 @@ import ArrayField from './fields/ArrayField'
 
 export default defineComponent({
   name: 'SchemaItems',
-  props: FilePropsDefine,
+  props: FieldPropsDefine,
   setup(props) {
     const retrievedSchemaRef = computed(() => {
       const { schema, rootSchema, value } = props

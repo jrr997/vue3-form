@@ -2,11 +2,13 @@ import { defineComponent, PropType } from 'vue'
 
 import { createUseStyles } from 'vue-jss'
 
-import { FilePropsDefine, Schema } from '../types'
+import { FieldPropsDefine, Schema, SelectionWidgetNames } from '../types'
 
 import { useVJSFContext } from '../context'
 
-import SelectionWidget from '../widgets/Selection'
+import { getWidget } from '../theme'
+
+// import SelectionWidget from '../widgets/Selection'
 
 const useStyles = createUseStyles({
   container: {
@@ -102,7 +104,7 @@ const ArrayItemWrapper = defineComponent({
  */
 export default defineComponent({
   name: 'ArrayField',
-  props: FilePropsDefine,
+  props: FieldPropsDefine,
   setup(props) {
     const context = useVJSFContext()
 
@@ -157,7 +159,12 @@ export default defineComponent({
       props.onChange(arr)
     }
 
+    const SelectionWidgetRef = getWidget(SelectionWidgetNames.SelectionWidget)
+
     return () => {
+      // const SelectionWidget = context.theme.widgets.SelectionWidget
+      const SelectionWidget = SelectionWidgetRef.value
+
       const { schema, rootSchema, value } = props
 
       const SchemaItem = context.SchemaItem
@@ -165,9 +172,6 @@ export default defineComponent({
       const isMultitype = Array.isArray(schema.items)
 
       const isSelect = schema.items && (schema.items as any).enum
-      console.log(schema)
-
-      console.log('isSelect,', isSelect)
 
       if (isMultitype) {
         const items: Schema[] = schema.items as any
